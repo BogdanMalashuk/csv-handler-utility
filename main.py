@@ -1,6 +1,6 @@
 import csv
 from tabulate import tabulate
-from utils import parse_condition
+from utils import filter_data
 from aggregator import aggregate
 from sorter import sort_data
 from parser import parse_args
@@ -9,28 +9,6 @@ from parser import parse_args
 def load_data(file_path):
     with open(file_path, newline='', encoding='utf-8') as f:
         return list(csv.DictReader(f))
-
-
-def filter_data(data, condition):
-    col, op, val = parse_condition(condition)
-    result = []
-
-    for row in data:
-        cell = row[col]
-        if op == '==':
-            if cell == val:
-                result.append(row)
-        else:
-            try:
-                cell_value = float(cell)
-                val_float = float(val)
-                if op == '>' and cell_value > val_float:
-                    result.append(row)
-                elif op == '<' and cell_value < val_float:
-                    result.append(row)
-            except ValueError:
-                continue
-    return result
 
 
 def main():
