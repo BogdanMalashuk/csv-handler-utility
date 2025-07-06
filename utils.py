@@ -5,30 +5,30 @@ def parse_condition(condition):
     match = re.match(r'(\w+)\s*(=|>|<)\s*(.+)', condition)
     if not match:
         raise ValueError("Invalid condition format")
-    col, operator, val = match.groups()
+    column, operator, value = match.groups()
 
     if operator == '=':
         operator = '=='
 
-    return col, operator, val
+    return column, operator, value
 
 
 def filter_data(data, condition):
-    col, op, val = parse_condition(condition)
+    column, operator, value = parse_condition(condition)
     result = []
 
     for row in data:
-        cell = row[col]
-        if op == '==':
-            if cell == val:
+        cell = row[column]
+        if operator == '==':
+            if cell == value:
                 result.append(row)
         else:
             try:
                 cell_value = float(cell)
-                val_float = float(val)
-                if op == '>' and cell_value > val_float:
+                value_float = float(value)
+                if operator == '>' and cell_value > value_float:
                     result.append(row)
-                elif op == '<' and cell_value < val_float:
+                elif operator == '<' and cell_value < value_float:
                     result.append(row)
             except ValueError:
                 continue

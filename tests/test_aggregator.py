@@ -13,17 +13,17 @@ def data():
 
 def test_aggregate_avg(data):
     result = aggregate(data, "price", "avg")
-    assert result == 20.0  # было: {"price avg": 20.0}
+    assert result == 20.0
 
 
 def test_aggregate_min(data):
     result = aggregate(data, "price", "min")
-    assert result == 10.0  # было: {"price min": 10.0}
+    assert result == 10.0
 
 
 def test_aggregate_max(data):
     result = aggregate(data, "price", "max")
-    assert result == 30.0  # было: {"price max": 30.0}
+    assert result == 30.0
 
 
 def test_aggregate_invalid_op(data):

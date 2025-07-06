@@ -20,9 +20,9 @@ def main():
         data = filter_data(data, args.where)
 
     if args.aggregate:
-        column, op = args.aggregate.split('=')
-        result = aggregate(data, column, op)
-        print(tabulate([[result]], headers=[op]))
+        column, operator = args.aggregate.split('=')
+        result = aggregate(data, column, operator)
+        print(tabulate([[result]], headers=[operator]))
     else:
         if args.order_by:
             column, direction = args.order_by.split('=')

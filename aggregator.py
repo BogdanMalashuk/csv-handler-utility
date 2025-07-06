@@ -5,8 +5,8 @@ AGGREGATIONS = {
 }
 
 
-def aggregate(data, column, op):
+def aggregate(data, column, operator):
     values = [float(row[column]) for row in data]
-    if op not in AGGREGATIONS:
-        raise ValueError(f"Unsupported aggregation: {op}")
-    return AGGREGATIONS[op](values)
+    if operator not in AGGREGATIONS:
+        raise ValueError(f"Unsupported aggregation: {operator}")
+    return AGGREGATIONS[operator](values)
