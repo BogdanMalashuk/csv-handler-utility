@@ -12,23 +12,36 @@ def load_data(file_path: str) -> List[Dict[str, str]]:
         return list(csv.DictReader(f))
 
 
-def main():
+def main() -> None:
     args = parse_args()
 
-    data = load_data(args.file)
+    try:
+        data = load_data(args.file)
 
-    if args.where:
-        data = filter_data(data, args.where)
+        if args.where:
+            data = filter_data(data, args.where)
 
-    if args.aggregate:
-        column, operator = args.aggregate.split('=')
-        result = aggregate(data, column, operator)
-        print(tabulate([[result]], headers=[operator], tablefmt="grid"))
-    else:
-        if args.order_by:
-            column, direction = args.order_by.split('=')
-            data = sort_data(data, column, direction)
-        print(tabulate(data, headers='keys', tablefmt="grid"))
+        if args.aggregate:
+            column, operator = args.aggregate.split('=')
+            result = aggregate(data, column, operator)
+            print(tabulate([[result]], headers=[operator], tablefmt="psql"))
+        else:
+            if args.order_by:
+                column, direction = args.order_by.split('=')
+                if direction.lower() not in ("asc", "desc"):
+                    raise ValueError("Сортировка должна быть 'asc' или 'desc'")
+                data = sort_data(data, column, direction)
+
+            print(tabulate(data, headers="keys", tablefmt="psql"))
+
+    except FileNotFoundError:
+        print(f"[Ошибка] Файл не найден: {args.file}")
+    except KeyError as e:
+        print(f"[Ошибка] Колонка не найдена: {e}")
+    except ValueError as e:
+        print(f"[Ошибка] Неверный ввод: {e}")
+    except Exception as e:
+        print(f"[Ошибка] Что-то пошло не так: {e}")
 
 
 if __name__ == '__main__':
