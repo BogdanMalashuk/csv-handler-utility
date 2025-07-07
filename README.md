@@ -33,7 +33,8 @@
 pytest --cov=. --cov-report=term
 ```
 ![img.png](screenshots/img.png)
-
+ 
+---
 # Примеры запуска:
 
 ### Вывод содержимого
