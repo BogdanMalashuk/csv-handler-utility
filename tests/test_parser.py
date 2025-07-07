@@ -1,6 +1,10 @@
 import pytest
 from utils import parse_condition
 
+'''
+Функции для тестирования, каждая возвращает None
+'''
+
 
 def test_parse_equal():
     column, operator, value = parse_condition("price=200")
@@ -23,4 +27,4 @@ def test_parse_less():
 
 def test_parse_invalid_format():
     with pytest.raises(ValueError):
-        parse_condition("price500")  # некорректный формат
+        parse_condition("price500")
