@@ -1,0 +1,28 @@
+Фильтрация:
+python main.py --file products.csv --where "price>900"
+python main.py --file products.csv --where "brand=apple"
+python main.py --file products.csv --where "rating<4.5"
+---------------------------------------------------------------------------------
+
+Агрегация:
+python main.py --file products.csv --aggregate "price=avg"
+python main.py --file products.csv --aggregate "rating=max"
+---------------------------------------------------------------------------------
+
+Сортировка:
+python main.py --file products.csv --order-by "price=asc"
+python main.py --file products.csv --order-by "brand=desc"
+---------------------------------------------------------------------------------
+
+Комбинированные:
+python main.py --file products.csv --where "brand=xiaomi" --order-by "price=desc"
+python main.py --file products.csv --where "rating>4.5" --aggregate "price=max"
+---------------------------------------------------------------------------------
+
+Ошибочные команды:
+python main.py --file products.csv --whhre "price>500"
+python main.py --file products.csv --where "prce>500"
+python main.py --file products.csv --where "price500"
+python main.py --file products.csv --aggregate "price=median"
+python main.py --file products.csv --aggregate "brand=avg"
+---------------------------------------------------------------------------------
