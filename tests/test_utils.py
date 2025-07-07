@@ -1,9 +1,16 @@
 import pytest
 from utils import filter_data
+from typing import List, Dict
+
+'''
+Аннотация к sample_data() написана
+Каждая функция принимает data() и возвращает None
+В связи с этим код не захламлял, к ним аннотации не писал
+'''
 
 
 @pytest.fixture
-def sample_data():
+def sample_data() -> List[Dict[str, str]]:
     return [
         {"price": "100", "brand": "apple"},
         {"price": "200", "brand": "samsung"},

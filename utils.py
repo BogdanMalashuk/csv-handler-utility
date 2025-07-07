@@ -1,7 +1,8 @@
 import re
+from typing import Tuple, List, Dict
 
 
-def parse_condition(condition):
+def parse_condition(condition: str) -> Tuple[str, str, str]:
     match = re.match(r'(\w+)\s*(=|>|<)\s*(.+)', condition)
     if not match:
         raise ValueError("Invalid condition format")
@@ -13,7 +14,7 @@ def parse_condition(condition):
     return column, operator, value
 
 
-def filter_data(data, condition):
+def filter_data(data: List[Dict[str, str]], condition: str) -> List[Dict[str, str]]:
     column, operator, value = parse_condition(condition)
     result = []
 
